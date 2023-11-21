@@ -46,11 +46,6 @@ public class FController extends HttpServlet {
 			service.execute(request, response);
 			url = "doLogin.jsp";
 			break;
-		case "/IdCheck.do":
-			
-			
-			
-			break;
 		case "/logout.do":
 			response.sendRedirect("logout.jsp");
 			break;
@@ -100,6 +95,7 @@ public class FController extends HttpServlet {
 			System.out.println("FController : bDelete.jsp호출");
 			url = "bDelete.jsp";
 			break;
+		
 		
 		}//switch
 		
