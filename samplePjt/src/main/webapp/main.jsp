@@ -6,10 +6,42 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>COOKIT</title>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/style_main.css">
+		<script>
+		   $(function(){
+			  $(".modal").click(function(){
+				  alert("close");
+				  $(".modal").addClass("popOff");
+			  }); 
+		   });
+		</script>
+		<style>
+		.popOff{display:none; }
+        .modal{
+            position:fixed; top:0; left:0;
+            width:100%; height:100%;
+            background-color: rgba(0,0,0,0.4); 
+        }
+        .modal_body{
+            position:absolute; top:25%; left:50%;  
+            width:400px; height:424px; 
+            padding:40px;  
+            text-align: center;
+
+            background:url('images/pop1.jpg');
+            background-size:100%;
+            /* background-color: rgb(255,255,255); */ 
+            border-radius:10px; 
+            box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);  
+            transform:translateX(-50%); 
+        }
+    </style>
+		
 	</head>
 	<body>
+	    
 	 	<header>
 	 		<div id="nav_up">
 	 			<ul>
@@ -444,5 +476,8 @@
 			 		</div>
 			 	</div>
 		</footer>
+		<div class="modal">
+	       <div class="modal_body"></div>
+	    </div>
 	</body>
 </html>
