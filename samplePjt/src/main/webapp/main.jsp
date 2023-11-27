@@ -18,7 +18,7 @@
 		 				<li><a href="login.do">로그인</a></li>
 	 			    </c:if>
 	 			    <c:if test="${session_id!=null}">
-		 				<li class="txtbold">${session_name}님</li>
+		 				<li class="txtbold"><a href="m_info_input.do">${session_name}님</a></li>
 		 				<li><a href="logout.do">로그아웃</a></li>
 	 			    </c:if>
 	 				<li><a href="n_list.do">고객행복센터</a></li>
@@ -27,7 +27,7 @@
 	 			</ul>
 	 		</div>
 	 		<nav>
-	 			<h1></h1>
+	 			<a href="main.do"><h1></h1></a>
 	 			<ul>
 	 				<li>COOKIT소개</li>
 	 				<li>COOKIT메뉴</li>

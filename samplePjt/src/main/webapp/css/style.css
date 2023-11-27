@@ -6,12 +6,15 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
 }
+a { text-decoration: none; }
+
 
 /* Header Section */
 header {
   height: 35px;
   background: black;
   color: white;
+  
 }
 
 header ul {
@@ -19,11 +22,13 @@ header ul {
   float: right;
   list-style-type: none;
 }
+header ul li a{color:white; font-size: 13px;}
 
 li {
   display: inline-block;
   padding-right: 5px;
   font-size: 13px;
+  
 }
 
 header span {
