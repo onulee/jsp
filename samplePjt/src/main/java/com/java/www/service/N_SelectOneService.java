@@ -26,6 +26,8 @@ public class N_SelectOneService implements Service {
 		BoardDto preDto = null;
 		BoardDto nextDto = null;
 		if(fileName.equals("/n_view.do")) {
+			//bhit 1증가
+			bdao.bhitUp(bno); //update board set bhit = bhit+1 where bno=?
 			preDto = bdao.preSelectOne(bno);  //+1
 			nextDto = bdao.nextSelectOne(bno); //-1
 		}

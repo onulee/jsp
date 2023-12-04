@@ -17,6 +17,7 @@ public class MSelectOneService implements Service {
 		
 		//dao접근 - select
 		MemberDao mdao = new MemberDao();
+		
 		MemberDto mdto = mdao.selectOne(id);
 		
 		//request 추가

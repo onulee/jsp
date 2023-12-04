@@ -12,7 +12,7 @@
 		<script>
 		   $(function(){
 			  $(".modal").click(function(){
-				  alert("close");
+				  //alert("close");
 				  $(".modal").addClass("popOff");
 			  }); 
 		   });
@@ -43,7 +43,7 @@
 	<body>
 	    
 	 	<header>
-	 		<div id="nav_up">
+	 		<div id="nav_up" >
 	 			<ul>
 	 			    <c:if test="${session_id==null}">
 		 				<li><a href="join01_terms.do">회원가입</a></li>
@@ -60,12 +60,12 @@
 	 		</div>
 	 		<nav>
 	 			<a href="main.do"><h1></h1></a>
-	 			<ul>
-	 				<li>COOKIT소개</li>
-	 				<li>COOKIT메뉴</li>
-	 				<li>리뷰</li>
-	 				<li>이벤트</li>
-	 				<li>MY쿡킷</li>
+	 			<ul >
+	 				<li class="navFont">COOKIT소개</li>
+	 				<li class="navFont">COOKIT메뉴</li>
+	 				<li class="navFont">리뷰</li>
+	 				<li class="navFont">이벤트</li>
+	 				<li class="navFont">MY쿡킷</li>
 	 			</ul>
 	 			<ul>
 	 				<li><a href="#"><span>장바구니</span></a></li>

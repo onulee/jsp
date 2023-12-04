@@ -373,6 +373,27 @@ public class BoardDao {
 		return result;
 	}
 
+	//조회수 1증가
+	public void bhitUp(int bno2) {
+		try {
+			conn = getConnection();
+			query = "update board set bhit = bhit+1 where bno=?";
+			pstmt = conn.prepareStatement(query);
+			//1,2
+			pstmt.setInt(1, bno2);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}//
+		
+	}
+
 	
 
 	

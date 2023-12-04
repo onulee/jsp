@@ -49,6 +49,11 @@
 			 
 			 //pw1,pw2 비교
 			 $("#pw2").keyup(function(){
+				 if($("#pw2").val()==""){
+					 $("#txtPw").text("비밀번호를 다시 한번 입력해 주세요.");
+					 return false;
+				 }
+				 
 				 if($("#pw1").val()!=$("#pw2").val()){
 					 $("#txtPw").text("비밀번호가 일치하지 않습니다.");
 					 $("#txtPw").addClass("txtOff");

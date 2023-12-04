@@ -8,9 +8,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <title>게시글 보기</title>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/read.css">
   <script>
@@ -22,6 +23,9 @@
     	});
     });
   </script>
+  <style>
+     .fa{font-family: 'Font Awesome 5 Free';} 
+  </style>
 </head>
 
 <body>
@@ -35,7 +39,13 @@
         <th><strong>제목</strong><span class="separator">|</span> ${bdto.btitle }</th>
       </tr>
       <tr>
-        <td><strong>날짜</strong><span class="separator">|</span><fmt:formatDate value="${bdto.bdate}" pattern="yyyy-MM-dd"/></td>
+        <td><strong>날짜</strong></i><span class="separator">|</span><fmt:formatDate value="${bdto.bdate}" pattern="yyyy-MM-dd"/></td>
+      </tr>
+      <tr>
+        <td>좋아요 
+        <i class="fa-solid fa-heart-circle-plus"></i>
+        <i class="fa-solid fa-heart-circle-minus"></i>
+        </td>
       </tr>
       <tr>
         <td class="article">${bdto.bcontent}</td>
