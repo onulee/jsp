@@ -1,5 +1,6 @@
 package com.java.www.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ public class EventOneService implements Service {
 		BoardDto bdto = edao.selectOne(bno);
 		//comment접근
 		ArrayList<EcommentDto> clist = edao.commSelectAll(bno);
+		
 		
 		//request추가
 		request.setAttribute("bdto", bdto);

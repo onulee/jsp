@@ -26,6 +26,7 @@ public class EventDao {
 	int cno;
 	String cpw,ccontent;
 	Timestamp cdate;
+	EcommentDto ecdto = null;
 	
 	//커넥션풀에서 Connection객체 가져오기
 	public Connection getConnection() {
@@ -38,10 +39,50 @@ public class EventDao {
 		return connection;
 	}//getConnection
 
+	
+	//게시글 개수
+	public int selectCount() {
+		int count = 0;
+		try {
+			conn = getConnection();
+			query = "select count(*) count from board";
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				count = rs.getInt("count");
+				System.out.println("dao selectCount count : "+count);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}//
+		return count; 
+	}
+	
 	//게시글 전체 가져오기
 	public ArrayList<BoardDto> selectAll() {
 		try {
 			conn = getConnection();
+			
+			//------------
+			//int count = selectCount();
+			//System.out.println("dao selectAll count : "+count);
+			int count=0;
+			query = "select count(*) count from board";
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				count = rs.getInt("count");
+				System.out.println("dao selectAll count : "+count);
+			}
+			
+			//-------------
+			
 			query = "select * from (select row_number() over (order by bgroup desc,bstep asc) rnum, a.* from board a) where rnum between ? and ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, 1);
@@ -136,6 +177,58 @@ public class EventDao {
 			} catch (Exception e2) { e2.printStackTrace();}
 		}//
 		return clist;
+	}
+
+
+	//하단댓글 1개 저장 및 검색
+	public EcommentDto CInsert(int bno2, String id2, String cpw2, String ccontent2) {
+		try {
+			//cno,bno,id,cpw,ccontent,cdate
+			conn = getConnection();
+			//select - nextval cno가져오기
+			query = "select ecomment_seq.nextval cno from dual";
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				cno = rs.getInt("cno");
+				System.out.println("dao CInsert cno : "+cno);
+			}
+			//insert - 하단댓글 1개 저장
+			query = "insert into ecomment values (?,?,?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cno);
+			pstmt.setInt(2, bno2);
+			pstmt.setString(3, id2);
+			pstmt.setString(4, cpw2);
+			pstmt.setString(5, ccontent2);
+			pstmt.executeUpdate();
+			
+			//select - 하단댓글 1개 가져오기
+			query = "select * from ecomment where cno=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, cno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				cno = rs.getInt("cno");
+				System.out.println("dao cno : "+cno);
+				bno = rs.getInt("bno");
+				id = rs.getString("id");
+				cpw = rs.getString("cpw");
+				ccontent = rs.getString("ccontent");
+				cdate = rs.getTimestamp("cdate");
+				ecdto = new EcommentDto(cno, bno, id, cpw, ccontent, cdate);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}//
+		return ecdto;
 	}
 	
 	

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<title>Insert title here</title>
+		<script>
+        
+	        // 참조
+	        // http://api.jquery.com/trigger/
+	        
+	        $(function(){
+	
+	            //---------------------------------------------------------------------//
+	
+	            // Translate ExtraParameter
+	            // 트리거시 인자 전달 가능
+	            $('#btn1').click(function(e, foo, foo2){
+	                // 사용자 클릭으로는 전달된 값이 없기 때문에 undefined
+	                console.log('foo: '+foo+' foo2: '+foo2);
+	                $('#result1').text('foo: '+foo+' foo2: '+foo2);
+	            });
+	            $('#btn1').trigger('click', ['ExtraParameter', 'ExtraParameter2']);
+	    
+	            //---------------------------------------------------------------------//
+	
+	            // Translate ExtraParameter by Event        
+	            $('#btn2').on('custom', function(e){
+	                console.log('2 e.user', e.user);
+	                console.log('2 e.job', e.job);
+	                $('#result2').text('user: '+e.user+' job: '+e.job);
+	            });
+	
+	            // 사용자 정의 이벤트 생성하여 전달 가능
+	            var clickEvent = $.Event('custom');
+	            clickEvent.user = 'ICJ';
+	            clickEvent.job = 'Programmer';
+	
+	            $('#btn2').trigger(clickEvent);
+	            
+	            //---------------------------------------------------------------------//
+	            
+	            // Translate ExtraParameter by Object
+	            $('#btn3').on('custom2', function(e){
+	                console.log('3 e.user', e.user);
+	                console.log('3 e.foo', e.foo);
+	                $('#result3').text('user: '+e.user+' foo: '+e.foo);
+	            });
+	
+	            // 트리거 자체에 속성 값으로 전달 가능
+	            $('#btn3').trigger({
+	                type:'custom2',
+	                user:'ICJ',
+	                foo:'etc..'
+	            });
+	
+	            //---------------------------------------------------------------------//
+	        });
+	
+	    </script>
+	</head>
+	<body>
+		<div>
+	        <button id="btn1">Param</button>
+	        <div id="result1"></div>
+	    </div>
+	
+	    <div>
+	        <button id="btn2">byEvent</button>
+	        <div id="result2"></div>
+	    </div>
+	
+	    <div>
+	        <button id="btn3">byObject</button>
+	        <div id="result3"></div>
+	    </div>
+
+	
+	</body>
+</html>
