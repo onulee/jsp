@@ -271,8 +271,27 @@ $(document).ready(function() {
                     			  data:{"bno":bno,"cpw":cpw,"ccontent":ccontent},
                     			  dataType:"json",
                     			  success:function(data){
-                    				  alert("성공");
-                    				  console.log(data);
+                    				  //alert("성공");
+                    				  //alert("댓글번호 : "+data.cno);
+                    				  //댓글등록 태그
+                            		  var htmlData='';
+                            		  htmlData += '<ul id="'+data.cno+'">';
+                            		  htmlData += '<li class="name">'+data.id+' <span> ['+data.cdate+']</span></li>';
+                            		  htmlData += '<li class="txt">'+data.ccontent+'</li>';
+                            		  htmlData += '<li class="btn">';
+                            		  htmlData += '<a class="rebtn">수정</a>&nbsp';
+                            		  htmlData += '<a class="rebtn">삭제</a>';
+                            		  htmlData += '</li>';
+                            		  htmlData += '</ul>';
+                            		  
+                            		  //댓글등록후 내용지우기
+          						      $(".replyBox").prepend(htmlData); //append()-마지막,prepend()-처음, html()-삭제후 추가
+                            		  $(".replynum").val("");  //비밀번호 글 삭제
+                            		  $(".replyType").val(""); //내용 글 삭제
+                            		  alert("댓글을 등록합니다.");
+                    				  
+                    				  
+                    				  
                     			  },
                     			  error:function(){
                     				  alert("실패");
@@ -282,25 +301,24 @@ $(document).ready(function() {
                   
                     		  
                     		  
-                    		  //댓글등록 태그
-                    		  var htmlData='';
-                    		  htmlData += '<ul id="0">';
-                    		  htmlData += '<li class="name">aaa <span>[2023-12-05]</span></li>';
-                    		  htmlData += '<li class="txt">'+ccontent+'</li>';
-                    		  htmlData += '<li class="btn">';
-                    		  htmlData += '<a class="rebtn">수정</a>&nbsp';
-                    		  htmlData += '<a class="rebtn">삭제</a>';
-                    		  htmlData += '</li>';
-                    		  htmlData += '</ul>';
                     		  
-                    		  //댓글등록후 내용지우기
-  						      $(".replyBox").prepend(htmlData); //append()-마지막,prepend()-처음, html()-삭제후 추가
-                    		  alert("댓글을 등록합니다.");
-                    		  $(".replyType").val("");
   						      
                     	   });
                        });
                     </script>
+
+					<script>
+                       $(function(){
+                    	  $(".upbtn").click(function(){
+                    		 var ulData = $(this).parent().parent();
+                    		 alert("수정제목 : "+$(this).parent().prev().prev().text()); 
+                    		 alert("수정내용 : "+$(this).parent().prev().text()); 
+                    		 alert("수정ul id : "+$(this).parent().parent().attr("id")); 
+                    		 alert("ulData name : "+ulData.find("li.txt").text()); 
+                    	  }); 
+                       });
+                    </script>
+
 
 					<!-- 댓글입력창 부분 -->
 					<div class="replyWrite">

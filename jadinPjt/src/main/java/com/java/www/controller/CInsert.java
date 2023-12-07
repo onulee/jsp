@@ -1,6 +1,8 @@
 package com.java.www.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import com.java.www.dao.EventDao;
 import com.java.www.dto.EcommentDto;
@@ -21,6 +25,7 @@ public class CInsert extends HttpServlet {
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doAction");
 		request.setCharacterEncoding("utf-8");
+		//ajax에서 넘어온 데이터 - bno,id,cpw,ccontent
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		HttpSession session = request.getSession();
 		String id = "aaa";
@@ -36,9 +41,20 @@ public class CInsert extends HttpServlet {
 		
 		System.out.println("controller doAction cno : "+ecdto.getCno());
 		
+		//하단댓글 1개 ajax으로 보내기
+		//json형태로 보냄. xml형태 -> html - 자바jsp - 파이썬
 		//
 		
+		JSONObject json = new JSONObject();
+		json.put("cno", ecdto.getCno());  //key,value
+		json.put("id", ecdto.getId());  //key,value
+		json.put("ccontent", ecdto.getCcontent());  //key,value
+		json.put("cdate", ""+ecdto.getCdate());  //key,value
 		
+		response.setContentType("application/x-json; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.print(json);
+		writer.close();
 		
 	}
 	

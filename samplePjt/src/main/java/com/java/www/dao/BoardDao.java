@@ -394,6 +394,58 @@ public class BoardDao {
 		
 	}
 
+	//좋아요부분 - 내가 좋아요 누른 상태 - select
+	public int myLikeSelect(String id2, int bno2) {
+		int my_like_count = 0;
+		try {
+			conn = getConnection();
+			query = "select count(*) my_like_count from b_likes where bno=? and id=? and like_status=1";
+			pstmt = conn.prepareStatement(query);
+			//1,2
+			pstmt.setInt(1, bno2);
+			pstmt.setString(2, id2);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				my_like_count = rs.getInt("my_like_count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}//
+		return my_like_count;
+	}//
+
+	//좋아요부분 - 전체 좋아요 개수 - select
+	public int allLikeSelect(int bno2) {
+		int all_like_count = 0;
+		try {
+			conn = getConnection();
+			query = "select count(*) all_like_count from b_likes where bno=? and like_status=1";
+			pstmt = conn.prepareStatement(query);
+			//1,2
+			pstmt.setInt(1, bno2);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				all_like_count = rs.getInt("all_like_count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}//
+		
+		return all_like_count;
+	}//
+
 	
 
 	

@@ -39,14 +39,44 @@
         <th><strong>제목</strong><span class="separator">|</span> ${bdto.btitle }</th>
       </tr>
       <tr>
-        <td><strong>날짜</strong></i><span class="separator">|</span><fmt:formatDate value="${bdto.bdate}" pattern="yyyy-MM-dd"/></td>
+        <td><strong>날짜</strong><span class="separator">|</span><fmt:formatDate value="${bdto.bdate}" pattern="yyyy-MM-dd"/></td>
       </tr>
+      <script>
+         $(function(){
+        	var myLike = "${my_like_count}"; //현재 좋아요 상태
+        	var htmlData = "";
+        	$("#likeStatus").click(function(){
+        		if(myLike==0){
+	        		alert("좋아요 추가");
+	        		alert($(".likeNo").text()+1);
+	        		var num = Number($(".likeNo").text())+1; //자바스크립트 형변환 Number
+	        		myLike = 1;
+	        		htmlData = '';
+	        		htmlData += '좋아요 <i class="fa-heart fa-solid"></i><span class="likeNo"> '+num+'</span>';
+	        		$("#likeStatus").html(htmlData);
+        		}else{
+	        		alert("좋아요 취소");
+	        		alert($(".likeNo").text());
+	        		var num = Number($(".likeNo").text())-1; //자바스크립트 형변환 Number
+	        		myLike = 0;
+	        		htmlData = '';
+	        		htmlData += '좋아요 <i class="fa-heart fa-regular"></i><span class="likeNo"> '+num+'</span>';
+	        		$("#likeStatus").html(htmlData);
+        		}
+        	}); 
+         });
+      </script>
       <tr>
-        <td>좋아요 
-        <i class="fa-solid fa-heart-circle-plus"></i>
-        <i class="fa-solid fa-heart-circle-minus"></i>
+        <td id="likeStatus">좋아요
+        <c:if test="${my_like_count==1}">
+        <i class="fa-heart fa-solid"></i><span class="likeNo"> ${all_like_count}</span>
+        </c:if>
+        <c:if test="${my_like_count!=1}">
+        <i class="fa-heart fa-regular"></i><span class="likeNo"> ${all_like_count}</span>
+        </c:if>
         </td>
       </tr>
+      
       <tr>
         <td class="article">${bdto.bcontent}</td>
       </tr>
