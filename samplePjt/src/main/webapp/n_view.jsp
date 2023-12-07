@@ -43,6 +43,7 @@
       </tr>
       <script>
          $(function(){
+        	var bno = "${bdto.bno}";
         	var myLike = "${my_like_count}"; //현재 좋아요 상태
         	var htmlData = "";
         	$("#likeStatus").click(function(){
@@ -51,17 +52,48 @@
 	        		alert($(".likeNo").text()+1);
 	        		var num = Number($(".likeNo").text())+1; //자바스크립트 형변환 Number
 	        		myLike = 1;
-	        		htmlData = '';
-	        		htmlData += '좋아요 <i class="fa-heart fa-solid"></i><span class="likeNo"> '+num+'</span>';
-	        		$("#likeStatus").html(htmlData);
+	        		//ajax추가
+	        		$.ajax({
+	        			url:"MyLikeUpdate",
+	        			type:"post",
+	        			data:{"bno":bno,"like_status":1},
+	        			dataType:"json",
+	        			success:function(data){
+	        				alert("성공");
+	        				alert("총 좋아요 개수 : "+data.all_like_count);
+	        				htmlData = '';
+	    	        		htmlData += '좋아요 <i class="fa-heart fa-solid"></i><span class="likeNo"> '+num+'</span>';
+	    	        		$("#likeStatus").html(htmlData);
+	        			},
+	        			error:function(){
+	        				alert("실패");
+	        			}
+	        		});
         		}else{
 	        		alert("좋아요 취소");
-	        		alert($(".likeNo").text());
+	        		//alert($(".likeNo").text());
 	        		var num = Number($(".likeNo").text())-1; //자바스크립트 형변환 Number
 	        		myLike = 0;
-	        		htmlData = '';
-	        		htmlData += '좋아요 <i class="fa-heart fa-regular"></i><span class="likeNo"> '+num+'</span>';
-	        		$("#likeStatus").html(htmlData);
+	        		//ajax추가
+	        		$.ajax({
+	        			url:"MyLikeUpdate",
+	        			type:"post",
+	        			data:{"bno":bno,"like_status":0},
+	        			dataType:"json",
+	        			success:function(data){
+	        				alert("성공");
+	        				alert("총 좋아요 개수 : "+data.all_like_count);
+	        				htmlData = '';
+	    	        		htmlData += '좋아요 <i class="fa-heart fa-regular"></i><span class="likeNo"> '+num+'</span>';
+	    	        		$("#likeStatus").html(htmlData);
+	        			},
+	        			error:function(){
+	        				alert("실패");
+	        			}
+	        		});
+	        		
+	        		
+	        		
         		}
         	}); 
          });
