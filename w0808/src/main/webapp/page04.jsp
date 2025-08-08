@@ -23,14 +23,19 @@
 		  	<th>결과값</th>
 		  </tr>
 		  <%-- 2~9단까지 출력하시오. --%>
-		  <%for(int j=1;j<=9;j++){  %>
-		  <tr>
-		    <td>2</td>
-		    <td>*</td>
-		    <td><%= j %></td>
-		    <td>=</td>
-		    <td><%= 2*j %></td>
-		  </tr>
+		  <%for(int i=2;i<=9;i++){  %>
+		  	  <tr>
+			    <td colspan="5">[ <%= i %> 단 ]</td>
+			  </tr>
+			  <%for(int j=1;j<=9;j++){  %>
+			  <tr>
+			    <td><%= i %></td>
+			    <td>*</td>
+			    <td><%= j %></td>
+			    <td>=</td>
+			    <td><%= 2*j %></td>
+			  </tr>
+			  <%}%>
 		  <%}%>
 		</table>
 	
