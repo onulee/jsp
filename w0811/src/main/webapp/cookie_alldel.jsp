@@ -16,7 +16,8 @@
 	<%
 	  //모든 쿠키 출력
 	  Cookie[] cookies = request.getCookies();
-	  for(Cookie cookie : cookies){
+	  if(cookies != null){ 
+	    for(Cookie cookie : cookies){
 	%>
 		 <table>
 		   <tr>
@@ -29,15 +30,22 @@
 		   </tr>
 		 </table>
 		  
-	<% } %> 
-	<%
-	// 쿠키모두 삭제
-	for(Cookie cookie : cookies){ 
-	   cookie.setMaxAge(0);
-	   response.addCookie(cookie);
-	} 
-	%>
-	<a href="./cookie_alldel.jsp">모든 쿠키삭제</a>
+	<%  }
+	  }else{ 
+	  %>
+	  	<table>
+		   <tr>
+		     <th>번호</th>
+		     <th>쿠키값</th>
+		   </tr>
+		   <tr>
+		     <td colspan="2">쿠키가 존재하지 않습니다.</td>
+		   </tr>
+		 </table>
+	 <%} %>  
+	
+	
+	<a href="./p05.jsp">다시시작</a>
 
 	
 	</body>

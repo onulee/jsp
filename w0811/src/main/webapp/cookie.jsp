@@ -12,6 +12,7 @@
 		</style>
 	</head>
 	<body>
+	<h2>쿠키1개 설정 : 쿠키전체검색, cook_name삭제</h2>
 	<%
 	  //모든 쿠키 출력
 	  Cookie[] cookies = request.getCookies();
