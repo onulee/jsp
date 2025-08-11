@@ -23,10 +23,22 @@
 		      <th>쿠키이름</th>
 		      <th>쿠키값</th>
 		    </tr>
+	   <%
+	       Cookie[] cookies = request.getCookies();
+	       if(cookies != null){
+		      for(Cookie cookie:cookies){
+		%>	   
 		    <tr>
-		      <td></td>
-		      <td></td>
+		      <td><%= cookie.getName()%></td>
+		      <td><%= cookie.getValue()%></td>
 		    </tr>
+		<%   }
+	       }else{ 
+		   %>
+		    <tr>
+		      <td colspan="2">쿠키가 없습니다.</td>
+		    </tr>
+		<%} %>   
 		    <tr>
 		      <td colspan="2">
 		        <a href="./product.jsp">장바구니 확인</a>
