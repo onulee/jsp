@@ -12,7 +12,11 @@
 		</style>
 	</head>
 	<body>
-	
+	<script>
+	   if( <%=request.getParameter("loginCheck")%> != null){
+		   alert("아이디 또는 패스워드가 일치하지 않습니다.");
+	   }
+	</script>
 	<h2>로그인</h2>
 	<form action="./loginOk.jsp">
 		<label>아이디</label>

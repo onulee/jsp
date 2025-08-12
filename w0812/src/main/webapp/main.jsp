@@ -24,6 +24,9 @@
 	 </table>
 	 <%}else{ %>
 	 <table>
+	       <tr>
+		     <th colspan="2">로그인성공</th>
+		   </tr>
 		   <tr>
 		     <th>아이디</th>
 		     <td><%=session.getAttribute("session_id") %></td>
@@ -33,7 +36,7 @@
 		     <td><%=session.getAttribute("session_nicName") %></td>
 		   </tr>
 		   <tr>
-		     <th colspan="2"><a href="./logout.jsp">로그인아웃</a></th>
+		     <th colspan="2"><a href="./logout.jsp">로그아웃</a></th>
 		   </tr>
 	 </table>
 	 <%} %>
